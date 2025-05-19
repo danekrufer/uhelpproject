@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата услуг | ЮПомощь</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-sans bg-gray-50">
+    <div class="min-h-screen py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-3xl font-bold text-gray-800 mb-4">Оплата юридических услуг</h1>
+                <p class="text-gray-600 max-w-2xl mx-auto">Выберите удобный способ оплаты и завершите транзакцию</p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Информация о заказе -->
+                <div class="lg:w-1/2">
+                    <div class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6">Детали заказа</h2>
+                        
+                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
+                            <div>
+                                <h3 class="font-medium text-gray-800" id="service-name">Консультация юриста</h3>
+                                <p class="text-sm text-gray-500" id="service-description">Развернутая консультация с анализом документов</p>
+                            </div>
+                            <span class="font-semibold text-gray-800" id="service-price">5 000 ₽</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-medium text-gray-600">Итого</span>
+                            <span class="text-xl font-bold text-gray-800" id="total-amount">5 000 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6">Информация о клиенте</h2>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">ФИО</label>
+                            <p class="text-gray-800 font-medium">Иванов Иван Иванович</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <p class="text-gray-800 font-medium">ivanov@example.com</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Телефон</label>
+                            <p class="text-gray-800 font-medium">+7 (900) 123-45-67</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 mb-2">Номер дела</label>
+                            <p class="text-gray-800 font-medium">#2023-07-0015</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Форма оплаты -->
+                <div class="lg:w-1/2">
+                    <div class="bg-white rounded-xl shadow-sm p-6 sticky top-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6">Способ оплаты</h2>
+                        
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <input id="card-payment" name="payment-method" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300" checked>
+                                <label for="card-payment" class="ml-3 block text-sm font-medium text-gray-700">
+                                    Банковская карта
+                                </label>
+                            </div>
+                            
+                            <div id="card-form" class="ml-7">
+                                <div class="mb-4">
+                                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-1">Номер карты</label>
+                                    <input type="text" id="card-number" placeholder="1234 5678 9012 3456" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label for="card-expiry" class="block text-sm font-medium text-gray-700 mb-1">Срок действия</label>
+                                        <input type="text" id="card-expiry" placeholder="MM/ГГ" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label for="card-cvc" class="block text-sm font-medium text-gray-700 mb-1">CVC/CVV</label>
+                                        <input type="text" id="card-cvc" placeholder="123" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="card-name" class="block text-sm font-medium text-gray-700 mb-1">Имя на карте</label>
+                                    <input type="text" id="card-name" placeholder="IVAN IVANOV" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center mb-4">
+                                <input id="bank-transfer" name="payment-method" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <label for="bank-transfer" class="ml-3 block text-sm font-medium text-gray-700">
+                                    Банковский перевод
+                                </label>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <input id="sbp" name="payment-method" type="radio" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300">
+                                <label for="sbp" class="ml-3 block text-sm font-medium text-gray-700">
+                                    Система быстрых платежей (СБП)
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="border-t border-gray-200 pt-6">
+                            <button id="pay-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                                Оплатить <span id="amount-to-pay">5 000</span> ₽
+                            </button>
+                        </div>
+                        
+                        <div class="mt-4 text-center text-sm text-gray-500">
+                            Нажимая кнопку "Оплатить", вы соглашаетесь с <a href="#" class="text-blue-600 hover:text-blue-800">условиями оказания услуг</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Получаем параметры из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceType = urlParams.get('service') || 'Консультация юриста';
+        const servicePrice = urlParams.get('price') || '5000';
+        const serviceDescription = urlParams.get('description') || 'Развернутая консультация с анализом документов';
+
+        // Обновляем информацию о заказе
+        document.getElementById('service-name').textContent = serviceType;
+        document.getElementById('service-description').textContent = serviceDescription;
+        document.getElementById('service-price').textContent = servicePrice + ' ₽';
+        document.getElementById('total-amount').textContent = servicePrice + ' ₽';
+        document.getElementById('amount-to-pay').textContent = servicePrice;
+
+        document.getElementById('pay-button').addEventListener('click', function() {
+            // Сохраняем платеж в localStorage
+            const payments = JSON.parse(localStorage.getItem('payments')) || [];
+            payments.push({
+                id: Date.now(),
+                client: "Иванов Иван Иванович",
+                amount: servicePrice + " ₽",
+                service: serviceType,
+                status: "paid",
+                date: new Date().toLocaleDateString()
+            });
+            localStorage.setItem('payments', JSON.stringify(payments));
+            
+            alert(`Оплата ${servicePrice} ₽ за услугу "${serviceType}" прошла успешно!`);
+            
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

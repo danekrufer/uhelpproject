@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель | ЮПомощь</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="font-sans bg-gray-100">
+    <!-- Проверка аутентификации -->
+    <script>
+        if (!localStorage.getItem('adminAuthenticated')) {
+            window.location.href = 'admin-login.html';
+        }
+    </script>
+
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 text-white">
+            <div class="p-4 border-b border-gray-700">
+                <div class="flex items-center">
+                    <div class="bg-blue-600 text-white p-2 rounded-lg mr-3">
+                        <i class="fas fa-balance-scale text-2xl"></i>
+                    </div>
+                    <h1 class="text-xl font-bold">ЮПомощь</h1>
+                </div>
+                <p class="text-sm text-gray-400 mt-1">Админ-панель</p>
+            </div>
+            
+            <nav class="p-4">
+                <ul>
+                    <li class="mb-2">
+                        <a href="#dashboard" class="block px-4 py-2 rounded-lg bg-gray-700 text-white">
+                            <i class="fas fa-tachometer-alt mr-2"></i> Дашборд
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#applications" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-inbox mr-2"></i> Заявки
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#payments" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-credit-card mr-2"></i> Платежи
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#services" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-gavel mr-2"></i> Услуги
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#team" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-users mr-2"></i> Команда
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#settings" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
+                            <i class="fas fa-cog mr-2"></i> Настройки
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        
+        <!-- Main content -->
+        <div class="flex-1">
+            <!-- Header -->
+            <header class="bg-white shadow-sm">
+                <div class="flex justify-between items-center p-4">
+                    <h2 class="text-xl font-semibold text-gray-800">Дашборд</h2>
+                    <div class="flex items-center space-x-4">
+                        <button id="logout-btn" class="text-gray-600 hover:text-blue-600">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Выйти
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content -->
+            <main class="p-6">
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Новые заявки</p>
+                                <h3 class="text-2xl font-bold text-gray-800" id="new-applications-count">0</h3>
+                            </div>
+                            <div class="bg-blue-100 text-blue-600 p-3 rounded-full">
+                                <i class="fas fa-inbox"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Ожидают оплаты</p>
+                                <h3 class="text-2xl font-bold text-gray-800" id="pending-payments-count">0</h3>
+                            </div>
+                            <div class="bg-yellow-100 text-yellow-600 p-3 rounded-full">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-gray-500">Завершенные дела</p>
+                                <h3 class="text-2xl font-bold text-gray-800" id="completed-cases-count">0</h3>
+                            </div>
+                            <div class="bg-green-100 text-green-600 p-3 rounded-full">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Управление данными -->
+                <div class="flex justify-end mb-4">
+                    <button onclick="exportData()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
+                        <i class="fas fa-file-export mr-2"></i> Экспорт данных
+                    </button>
+                    <button onclick="clearData()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg ml-2">
+                        <i class="fas fa-trash-alt mr-2"></i> Очистить данные
+                    </button>
+                </div>
+                
+                <!-- Recent Applications -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800">Последние заявки</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Имя</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Телефон</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Тип</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Статус</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дата</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="applications-table-body">
+                                <!-- Заявки будут загружены через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Recent Payments -->
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-800">Последние платежи</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Клиент</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Сумма</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Услуга</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Статус</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дата</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="payments-table-body">
+                                <!-- Платежи будут загружены через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Выход из системы
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            localStorage.removeItem('adminAuthenticated');
+            window.location.href = 'admin-login.html';
+        });
+
+        // Загрузка данных
+        document.addEventListener('DOMContentLoaded', function() {
+            updateData();
+        });
+
+        function updateData() {
+            // Загрузка заявок
+            const applications = JSON.parse(localStorage.getItem('applications')) || [];
+            
+            // Загрузка платежей
+            const payments = JSON.parse(localStorage.getItem('payments')) || [];
+            
+            // Обновление счетчиков
+            document.getElementById('new-applications-count').textContent = 
+                applications.filter(app => app.status === 'new').length;
+            document.getElementById('pending-payments-count').textContent = 
+                payments.filter(p => p.status === 'pending').length;
+            document.getElementById('completed-cases-count').textContent = 
+                applications.filter(app => app.status === 'completed').length;
+            
+            // Заполнение таблицы заявок
+            renderApplicationsTable(applications);
+            
+            // Заполнение таблицы платежей
+            renderPaymentsTable(payments);
+        }
+
+        function renderApplicationsTable(applications) {
+            const applicationsTable = document.getElementById('applications-table-body');
+            applicationsTable.innerHTML = '';
+            
+            applications.slice(0, 10).forEach(app => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${app.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${app.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${app.phone}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            ${app.type === 'consultation' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'}">
+                            ${app.type === 'consultation' ? 'Консультация' : 'Контакт'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            ${app.status === 'new' ? 'bg-yellow-100 text-yellow-800' : 
+                              app.status === 'in_progress' ? 'bg-blue-100 text-blue-800' : 
+                              'bg-green-100 text-green-800'}">
+                            ${app.status === 'new' ? 'Новая' : 
+                              app.status === 'in_progress' ? 'В работе' : 'Завершена'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        ${new Date(app.createdAt).toLocaleString()}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <button onclick="changeApplicationStatus(${app.id}, 'in_progress')" class="text-blue-600 hover:text-blue-900 mr-3">Принять</button>
+                        <button onclick="changeApplicationStatus(${app.id}, 'completed')" class="text-green-600 hover:text-green-900">Завершить</button>
+                    </td>
+                `;
+                
+                applicationsTable.appendChild(row);
+            });
+        }
+
+        function renderPaymentsTable(payments) {
+            const paymentsTable = document.getElementById('payments-table-body');
+            paymentsTable.innerHTML = '';
+            
+            payments.slice(0, 10).forEach(payment => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payment.id}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${payment.client}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">${payment.amount}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payment.service}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                            ${payment.status === 'paid' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                            ${payment.status === 'paid' ? 'Оплачен' : 'Ожидает'}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payment.date}</td>
+                `;
+                
+                paymentsTable.appendChild(row);
+            });
+        }
+
+        function changeApplicationStatus(id, newStatus) {
+            let applications = JSON.parse(localStorage.getItem('applications')) || [];
+            applications = applications.map(app => {
+                if (app.id === id) {
+                    return {...app, status: newStatus};
+                }
+                return app;
+            });
+            
+            localStorage.setItem('applications', JSON.stringify(applications));
+            updateData();
+        }
+
+        function exportData() {
+            const applications = JSON.parse(localStorage.getItem('applications')) || [];
+            const payments = JSON.parse(localStorage.getItem('payments')) || [];
+            
+            const data = {
+                applications,
+                payments,
+                exportedAt: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `ypomosh-data-${new Date().toISOString().slice(0,10)}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function clearData() {
+            if (confirm('Вы уверены, что хотите удалить все данные? Это действие нельзя отменить.')) {
+                localStorage.removeItem('applications');
+                localStorage.removeItem('payments');
+                alert('Все данные были удалены');
+                updateData();
+            }
+        }
+    </script>
+</body>
+</html>

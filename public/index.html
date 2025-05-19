@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Юридическая помощь "ЮПомощь"</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-section {
+            background: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            background-color: #f8fafc;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion.active .accordion-content {
+            max-height: 500px;
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            z-index: 0;
+        }
+        .support-card {
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .support-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .price-item {
+            transition: all 0.2s ease;
+        }
+        .price-item:hover {
+            background-color: #f8fafc;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="bg-blue-600 text-white p-2 rounded-lg mr-3">
+                    <i class="fas fa-balance-scale text-2xl"></i>
+                </div>
+                <h1 class="text-xl font-bold text-gray-800">ЮПомощь</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#services" class="nav-link text-gray-600 hover:text-blue-600">Услуги</a>
+                <a href="#about" class="nav-link text-gray-600 hover:text-blue-600">О нас</a>
+                <a href="#team" class="nav-link text-gray-600 hover:text-blue-600">Команда</a>
+                <a href="#testimonials" class="nav-link text-gray-600 hover:text-blue-600">Отзывы</a>
+                <a href="#support" class="nav-link text-gray-600 hover:text-blue-600">Поддержка</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600">Контакты</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <a href="tel:+74951234567" class="hidden md:flex items-center text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-phone-alt mr-2"></i>
+                    <span>+7 (495) 123-45-67</span>
+                </a>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300">
+                    Бесплатная консультация
+                </button>
+                <button class="md:hidden text-gray-600" id="mobile-menu-button">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white shadow-lg" id="mobile-menu">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
+                <a href="#services" class="text-gray-600 hover:text-blue-600 py-2">Услуги</a>
+                <a href="#about" class="text-gray-600 hover:text-blue-600 py-2">О нас</a>
+                <a href="#team" class="text-gray-600 hover:text-blue-600 py-2">Команда</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-blue-600 py-2">Отзывы</a>
+                <a href="#support" class="text-gray-600 hover:text-blue-600 py-2">Поддержка</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-600 py-2">Контакты</a>
+                <a href="tel:+74951234567" class="flex items-center text-gray-600 hover:text-blue-600 py-2">
+                    <i class="fas fa-phone-alt mr-2"></i>
+                    <span>+7 (495) 123-45-67</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white py-20 min-h-[500px] flex items-center">
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-2xl p-8 rounded-lg">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Профессиональная юридическая помощь</h2>
+                <p class="text-xl mb-8 opacity-90">Мы защищаем ваши права и интересы в любой правовой ситуации. Опытные юристы с более чем 15-летним стажем.</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <button id="consultation-btn" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                        Записаться на консультацию
+                    </button>
+                   <button id="price-btn" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-lg font-semibold transition duration-300">
+    Узнать стоимость услуг
+</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Modal -->
+    <div id="price-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-8 sticky top-0 bg-white py-4 border-b">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800">Стоимость юридических услуг</h3>
+                    <p class="text-gray-500">Прозрачные цены без скрытых платежей</p>
+                </div>
+                <button id="close-price-modal" class="text-gray-400 hover:text-gray-600 transition">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <!-- Pricing Tabs -->
+            <div class="mb-8">
+                <div class="flex flex-wrap border-b border-gray-200">
+                    <button class="price-tab active px-6 py-3 font-medium text-gray-700 border-b-2 border-blue-600" data-tab="individual">
+                        Для физических лиц
+                    </button>
+                    <button class="price-tab px-6 py-3 font-medium text-gray-500 hover:text-gray-700" data-tab="business">
+                        Для бизнеса
+                    </button>
+                    <button class="price-tab px-6 py-3 font-medium text-gray-500 hover:text-gray-700" data-tab="premium">
+                        Премиум услуги
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Individual Pricing -->
+            <div id="individual-tab" class="price-tab-content active">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Basic Plan -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Базовый</h4>
+                            <p class="text-gray-500">Для простых юридических вопросов</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 5 000 ₽</span>
+                            <span class="text-gray-500">/за услугу</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Консультация юриста (30 мин)</li>
+                            <li class="price-feature">Анализ документов</li>
+                            <li class="price-feature">Письменный ответ</li>
+                            <li class="price-feature text-gray-400 line-through">Представительство в суде</li>
+                            <li class="price-feature text-gray-400 line-through">Составление иска</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+						</button>
+                    </div>
+                    
+                    <!-- Standard Plan (Popular) -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-blue-100 p-6 relative">
+                        <div class="popular-badge">Популярный</div>
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Стандарт</h4>
+                            <p class="text-gray-500">Для решения большинства вопросов</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 15 000 ₽</span>
+                            <span class="text-gray-500">/за услугу</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Консультация юриста (1 час)</li>
+                            <li class="price-feature">Полный анализ документов</li>
+                            <li class="price-feature">Составление искового заявления</li>
+                            <li class="price-feature">1 судебное заседание</li>
+                            <li class="price-feature text-gray-400 line-through">Полное сопровождение дела</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+                        </button>
+                    </div>
+                    
+                    <!-- Premium Plan -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Премиум</h4>
+                            <p class="text-gray-500">Для сложных юридических вопросов</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 30 000 ₽</span>
+                            <span class="text-gray-500">/за услугу</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Персональный юрист</li>
+                            <li class="price-feature">Полный анализ ситуации</li>
+                            <li class="price-feature">Составление всех документов</li>
+                            <li class="price-feature">Полное сопровождение дела</li>
+                            <li class="price-feature">Апелляционное обжалование</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Подробный прайс-лист</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Услуга</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Описание</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Сроки</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Стоимость</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Консультация юриста</td>
+                                    <td class="px-6 py-4 text-gray-500">Устная консультация по правовому вопросу</td>
+                                    <td class="px-6 py-4 text-gray-500">30 минут</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">Бесплатно</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Развернутая консультация</td>
+                                    <td class="px-6 py-4 text-gray-500">С анализом документов и письменным заключением</td>
+                                    <td class="px-6 py-4 text-gray-500">1 час</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 3 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Составление искового заявления</td>
+                                    <td class="px-6 py-4 text-gray-500">С учетом специфики дела и требований</td>
+                                    <td class="px-6 py-4 text-gray-500">1-3 дня</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 5 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Представительство в суде</td>
+                                    <td class="px-6 py-4 text-gray-500">За одно судебное заседание</td>
+                                    <td class="px-6 py-4 text-gray-500">1 заседание</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 10 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Сопровождение дела</td>
+                                    <td class="px-6 py-4 text-gray-500">Полное ведение дела в суде первой инстанции</td>
+                                    <td class="px-6 py-4 text-gray-500">1-6 месяцев</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 50 000 ₽</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Business Pricing -->
+            <div id="business-tab" class="price-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Startup Plan -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Стартап</h4>
+                            <p class="text-gray-500">Для начинающих предпринимателей</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 10 000 ₽</span>
+                            <span class="text-gray-500">/за услугу</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Регистрация ИП/ООО</li>
+                            <li class="price-feature">Консультации по налогам</li>
+                            <li class="price-feature">Разработка договоров</li>
+                            <li class="price-feature text-gray-400 line-through">Абонентское обслуживание</li>
+                            <li class="price-feature text-gray-400 line-through">Налоговый аудит</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+                        </button>
+                    </div>
+                    
+                    <!-- Business Plan (Popular) -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-blue-100 p-6 relative">
+                        <div class="popular-badge">Популярный</div>
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Бизнес</h4>
+                            <p class="text-gray-500">Для среднего бизнеса</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 25 000 ₽</span>
+                            <span class="text-gray-500">/месяц</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Абонентское обслуживание</li>
+                            <li class="price-feature">Консультации по всем вопросам</li>
+                            <li class="price-feature">Разработка договоров</li>
+                            <li class="price-feature">Представительство в суде</li>
+                            <li class="price-feature text-gray-400 line-through">Налоговый аудит</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+                        </button>
+                    </div>
+                    
+                    <!-- Corporate Plan -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <h4 class="text-xl font-bold text-gray-800 mb-2">Корпоративный</h4>
+                            <p class="text-gray-500">Для крупных компаний</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 50 000 ₽</span>
+                            <span class="text-gray-500">/месяц</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Персональный юрист</li>
+                            <li class="price-feature">Полное сопровождение</li>
+                            <li class="price-feature">Налоговый аудит</li>
+                            <li class="price-feature">Сопровождение сделок</li>
+                            <li class="price-feature">Корпоративные споры</li>
+                        </ul>
+                        <button onclick="window.location.href='payment.html'" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition">
+    Оплатить тариф
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Подробный прайс-лист для бизнеса</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white rounded-lg overflow-hidden">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Услуга</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Описание</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Сроки</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Стоимость</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Регистрация ООО/ИП</td>
+                                    <td class="px-6 py-4 text-gray-500">Полный пакет документов</td>
+                                    <td class="px-6 py-4 text-gray-500">3-5 дней</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 10 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Абонентское обслуживание</td>
+                                    <td class="px-6 py-4 text-gray-500">Ежемесячное юридическое сопровождение</td>
+                                    <td class="px-6 py-4 text-gray-500">1 месяц</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 15 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Налоговые споры</td>
+                                    <td class="px-6 py-4 text-gray-500">Защита при проверках, обжалование решений</td>
+                                    <td class="px-6 py-4 text-gray-500">1-6 месяцев</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 30 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Банкротство юр. лиц</td>
+                                    <td class="px-6 py-4 text-gray-500">Полное сопровождение процедуры</td>
+                                    <td class="px-6 py-4 text-gray-500">6-12 месяцев</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 50 000 ₽</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">Сопровождение сделки</td>
+                                    <td class="px-6 py-4 text-gray-500">Юридическое сопровождение M&A</td>
+                                    <td class="px-6 py-4 text-gray-500">1-3 месяца</td>
+                                    <td class="px-6 py-4 text-gray-900 font-medium">от 100 000 ₽</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Premium Pricing -->
+            <div id="premium-tab" class="price-tab-content hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <!-- VIP Support -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <div class="flex items-center">
+                                <h4 class="text-xl font-bold text-gray-800 mb-2">VIP Поддержка</h4>
+                                <span class="ml-2 bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Премиум</span>
+                            </div>
+                            <p class="text-gray-500">Персональный юрист 24/7</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 100 000 ₽</span>
+                            <span class="text-gray-500">/месяц</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Персональный юрист</li>
+                            <li class="price-feature">Круглосуточная поддержка</li>
+                            <li class="price-feature">Приоритетное рассмотрение</li>
+                            <li class="price-feature">Выезд юриста в офис</li>
+                            <li class="price-feature">Экстренная помощь</li>
+                        </ul>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition">
+                            Заказать услугу
+                        </button>
+                    </div>
+                    
+                    <!-- Complex Case -->
+                    <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                        <div class="mb-6">
+                            <div class="flex items-center">
+                                <h4 class="text-xl font-bold text-gray-800 mb-2">Сложное дело</h4>
+                                <span class="ml-2 bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">Премиум</span>
+                            </div>
+                            <p class="text-gray-500">Комплексное решение сложных вопросов</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-bold text-gray-800">от 150 000 ₽</span>
+                            <span class="text-gray-500">/проект</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="price-feature">Команда специалистов</li>
+                            <li class="price-feature">Стратегическое планирование</li>
+                            <li class="price-feature">Полное сопровождение</li>
+                            <li class="price-feature">Анализ рисков</li>
+                            <li class="price-feature">Конфиденциальность</li>
+                        </ul>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition">
+                            Заказать услугу
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-6 rounded-lg border border-blue-100">
+                    <div class="flex items-start">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4 flex-shrink-0">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-blue-800 mb-2">Точную стоимость вашего дела можно узнать после консультации</h4>
+                            <p class="text-blue-700 mb-4">Цены указаны ориентировочно и могут меняться в зависимости от сложности дела, срочности и других факторов. Мы предлагаем индивидуальный подход к каждому клиенту.</p>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition">
+                                <i class="fas fa-phone-alt mr-2"></i> Заказать консультацию
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="stat-card bg-white p-8 rounded-xl shadow-sm text-center relative">
+                    <div class="text-5xl font-bold text-blue-600 mb-3 relative z-10">15+</div>
+                    <div class="text-gray-600 font-medium relative z-10">Лет опыта</div>
+                    <div class="absolute top-0 right-0 text-blue-100 text-7xl opacity-30">
+                        <i class="fas fa-award"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card bg-white p-8 rounded-xl shadow-sm text-center relative">
+                    <div class="text-5xl font-bold text-blue-600 mb-3 relative z-10">3000+</div>
+                    <div class="text-gray-600 font-medium relative z-10">Довольных клиентов</div>
+                    <div class="absolute top-0 right-0 text-blue-100 text-7xl opacity-30">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card bg-white p-8 rounded-xl shadow-sm text-center relative">
+                    <div class="text-5xl font-bold text-blue-600 mb-3 relative z-10">95%</div>
+                    <div class="text-gray-600 font-medium relative z-10">Успешных дел</div>
+                    <div class="absolute top-0 right-0 text-blue-100 text-7xl opacity-30">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+                
+                <div class="stat-card bg-white p-8 rounded-xl shadow-sm text-center relative">
+                    <div class="text-5xl font-bold text-blue-600 mb-3 relative z-10">24/7</div>
+                    <div class="text-gray-600 font-medium relative z-10">Поддержка клиентов</div>
+                    <div class="absolute top-0 right-0 text-blue-100 text-7xl opacity-30">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Наши услуги</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Мы предоставляем полный спектр юридических услуг для физических и юридических лиц</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-gavel text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Уголовные дела</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Защита на всех стадиях уголовного процесса, обжалование приговоров, условно-досрочное освобождение.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-home text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Жилищные споры</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Раздел имущества, выселение, признание права собственности, споры с управляющими компаниями.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-briefcase text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Трудовые споры</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Восстановление на работе, взыскание заработной платы, компенсации, защита прав работников и работодателей.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-handshake text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Договорное право</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Составление и эксперзиза договоров, взыскание задолженности, защита от недобросовестных контрагентов.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-user-tie text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Налоговые споры</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Защита в налоговых проверках, обжалование решений налоговых органов, оптимизация налогообложения.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
+                    <div class="p-6 relative z-10">
+                        <div class="bg-blue-600 text-white w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white group-hover:text-blue-600 transition duration-300">
+                            <i class="fas fa-building text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition duration-300">Корпоративное право</h3>
+                        <p class="text-gray-600 mb-4 group-hover:text-gray-800 transition duration-300">Регистрация предприятий, сопровождение сделок с акциями, защита интересов акционеров и участников.</p>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 flex items-center transition duration-300">
+                            Подробнее
+                            <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 group">
+                    Все услуги
+                    <i class="fas fa-arrow-right ml-2 group-hover:ml-3 transition-all duration-300"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <img src="https://images.unsplash.com/photo-1521791055366-0d40387274f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Офис юридической компании" 
+                         class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">О нашей компании</h2>
+                    <p class="text-gray-600 mb-6">Юридическая компания "ЮПомощь" была основана в 2008 году с целью предоставления высококвалифицированных юридических услуг для бизнеса и частных лиц. За годы работы мы заслужили репутацию надежного партнера в решении самых сложных правовых вопросов.</p>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-2 mr-4">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Индивидуальный подход</h4>
+                                <p class="text-gray-600">Для каждого клиента мы разрабатываем персональную стратегию защиты его интересов.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-2 mr-4">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Конфиденциальность</h4>
+                                <p class="text-gray-600">Мы гарантируем полную конфиденциальность всей информации, полученной от клиента.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-2 mr-4">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Результативность</h4>
+                                <p class="text-gray-600">95% наших дел заканчиваются успешно в пользу клиента благодаря тщательной подготовке.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                        Узнать больше о нас
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Наша команда</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Профессиональные юристы с многолетним опытом работы в различных отраслях права</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Иванов Иван Иванович" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Иванов Иван Иванович</h3>
+                        <p class="text-blue-600 mb-4">Управляющий партнер, адвокат</p>
+                        <p class="text-gray-600 mb-4">Специализация: уголовное право, арбитражные споры. Опыт работы - 18 лет.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Петрова Елена Сергеевна" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Петрова Елена Сергеевна</h3>
+                        <p class="text-blue-600 mb-4">Партнер, корпоративный юрист</p>
+                        <p class="text-gray-600 mb-4">Специализация: корпоративное право, M&A. Опыт работы - 15 лет.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden transition duration-300 hover:shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Сидоров Алексей Викторович" 
+                         class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Сидоров Алексей Викторович</h3>
+                        <p class="text-blue-600 mb-4">Старший юрист</p>
+                        <p class="text-gray-600 mb-4">Специализация: налоговое право, договорное право. Опыт работы - 12 лет.</p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-blue-600">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                    Вся команда
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Отзывы наших клиентов</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Мы гордимся доверием, которое оказывают нам наши клиенты</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://cdn.discordapp.com/attachments/1177908396712792195/1373735335133188127/image.png?ex=682b7e3a&is=682a2cba&hm=02d25416dbea174401c1952d3cb435d897263e03aee3741c0bc8e56101dd05a9&" alt="Дмитрий С." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Сергей З. </h4>
+                            <p class="text-gray-500">Генеральный директор ООО "PRIMO Tech"</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Юридическая компания 'ЮПомощь' помогла нам выиграть сложный арбитражный спор на сумму более 15 млн рублей. Профессионализм и внимательность юристов впечатляют. Рекомендую!"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://cdn.discordapp.com/attachments/1177908396712792195/1373734599041093632/image.png?ex=682b7d8b&is=682a2c0b&hm=8fb466908ce619431f2bdcd626cd1976cb9a44d66971438d75637fcd307704fc&" alt="Ольга К." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Денис М.</h4>
+                            <p class="text-gray-500">Честный человек</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Благодаря юристам компании удалось отстоять мои интересы в налоговой инспекции. Сэкономили мне более 2 млн рублей налогов. Очень благодарна за квалифицированную помощь и человеческое отношение."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Андрей В." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Виктор З.</h4>
+                            <p class="text-gray-500">Физическое лицо</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Попал в сложную ситуацию с недвижимостью. Юристы компании помогли разобраться и защитить мои права как собственника. Все сделали быстро, профессионально и по разумной цене. Спасибо!"</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="bg-gray-50 rounded-xl p-8 testimonial-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+                            <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Екатерина М." class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Олег Т.</h4>
+                            <p class="text-gray-500">HR-директор</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-6">"Компания сопровождает наш бизнес уже более 5 лет. Всегда оперативные и грамотные консультации, помощь в подготовке документов. Особенно хочу отметить работу по трудовым спорам - все конфликты решаются в нашу пользу."</p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Наша поддержка</h2>
+                <p class="max-w-2xl mx-auto opacity-90">Мы предлагаем комплексную поддержку на всех этапах решения вашего вопроса</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white bg-opacity-10 p-8 rounded-xl support-card">
+                    <div class="text-4xl mb-4 text-blue-200">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Круглосуточная поддержка</h3>
+                    <p class="opacity-90">Наши юристы доступны 24/7 для экстренных консультаций и помощи в критических ситуациях.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-8 rounded-xl support-card">
+                    <div class="text-4xl mb-4 text-blue-200">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Документальное сопровождение</h3>
+                    <p class="opacity-90">Полный цикл подготовки документов: от составления до подачи в государственные органы.</p>
+                </div>
+                
+                <div class="bg-white bg-opacity-10 p-8 rounded-xl support-card">
+                    <div class="text-4xl mb-4 text-blue-200">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Персональный юрист</h3>
+                    <p class="opacity-90">Закрепление персонального юриста за клиентом для полного погружения в ситуацию.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Часто задаваемые вопросы</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Ответы на самые популярные вопросы наших клиентов</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- FAQ Item 1 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 accordion">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800 accordion-button">
+                        <span>Какова стоимость первичной консультации?</span>
+                        <i class="fas fa-plus text-blue-600"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600">
+                        <p>Первичная консультация длительностью до 30 минут проводится бесплатно. Это позволяет нам понять суть вашей проблемы и предложить оптимальное решение. Для более детального анализа ситуации возможна платная консультация от 3 000 рублей.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 accordion">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800 accordion-button">
+                        <span>Какие документы нужно подготовить для консультации?</span>
+                        <i class="fas fa-plus text-blue-600"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600">
+                        <p>Для первичной консультации достаточно паспорта и краткого описания ситуации. Если у вас уже есть документы, относящиеся к делу (договоры, судебные решения, претензии и т.д.), желательно взять их с собой. Наш юрист подскажет, какие дополнительные документы могут потребоваться.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 accordion">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800 accordion-button">
+                        <span>Как долго длится судебный процесс?</span>
+                        <i class="fas fa-plus text-blue-600"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600">
+                        <p>Срок рассмотрения дела зависит от его сложности, загруженности суда и других факторов. В среднем, рассмотрение дела в суде первой инстанции занимает от 2 до 6 месяцев. Арбитражные дела могут рассматриваться быстрее - от 1 месяца. Мы всегда стремимся ускорить процесс, насколько это возможно.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 accordion">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800 accordion-button">
+                        <span>Можно ли решить вопрос без суда?</span>
+                        <i class="fas fa-plus text-blue-600"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600">
+                        <p>В большинстве случаев мы рекомендуем сначала попытаться урегулировать спор в досудебном порядке. Это экономит время и деньги клиента. Наши юристы подготовят грамотную претензию, проведут переговоры и помогут достичь мирового соглашения. Если же договориться не удается, мы готовы защищать ваши интересы в суде.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 5 -->
+                <div class="mb-4 border-b border-gray-200 pb-4 accordion">
+                    <button class="flex justify-between items-center w-full text-left font-semibold text-gray-800 accordion-button">
+                        <span>Какие гарантии вы предоставляете?</span>
+                        <i class="fas fa-plus text-blue-600"></i>
+                    </button>
+                    <div class="accordion-content mt-2 text-gray-600">
+                        <p>Мы гарантируем профессиональный подход, конфиденциальность и соблюдение сроков. Однако ни один юрист не может гарантировать 100% результат по делу, так как это зависит от многих факторов, включая позицию суда. Мы беремся только за те дела, в успех которых верим, и делаем все возможное для положительного исхода.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300">
+                    Задать вопрос
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Свяжитесь с нами</h2>
+                    <p class="text-gray-600 mb-8">Мы готовы ответить на ваши вопросы и предложить оптимальное решение вашей проблемы. Оставьте заявку или свяжитесь с нами удобным способом.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Адрес</h4>
+                                <p class="text-gray-600">г. Москва, ул. Тверская, д. 18, офис 305</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Телефон</h4>
+                                <p class="text-gray-600">+7 (495) 123-45-67</p>
+                                <p class="text-gray-600">+7 (800) 123-45-67 (бесплатно по РФ)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Email</h4>
+                                <p class="text-gray-600">info@ypomosh.ru</p>
+                                <p class="text-gray-600">consult@ypomosh.ru (для консультаций)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 mb-1">Режим работы</h4>
+                                <p class="text-gray-600">Пн-Пт: 9:00 - 19:00</p>
+                                <p class="text-gray-600">Сб: 10:00 - 16:00 (по предварительной записи)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-800 mb-4">Мы в социальных сетях:</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-gray-100 text-gray-600 hover:bg-blue-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="bg-gray-100 text-gray-600 hover:bg-blue-400 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-gray-100 text-gray-600 hover:bg-blue-800 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="bg-gray-100 text-gray-600 hover:bg-blue-600 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                                <i class="fab fa-vk"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-6">Оставьте заявку</h3>
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 mb-2">Ваше имя</label>
+                                <input type="text" id="name", class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="phone" class="block text-gray-700 mb-2">Телефон</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="service" class="block text-gray-700 mb-2">Интересующая услуга</label>
+                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent">
+                                    <option value="">Выберите услуга</option>
+                                    <option value="criminal">Уголовные дела</option>
+                                    <option value="housing">Жилищные споры</option>
+                                    <option value="labor">Трудовые споры</option>
+                                    <option value="contract">Договорное право</option>
+                                    <option value="tax">Налоговые споры</option>
+                                    <option value="corporate">Корпоративное право</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="message" class="block text-gray-700 mb-2">Сообщение</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"></textarea>
+                            </div>
+                            <div class="mb-4">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" class="form-checkbox text-blue-600" required>
+                                    <span class="ml-2 text-gray-600">Я согласен на обработку персональных данных</span>
+                                </label>
+                            </div>
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                                Отправить заявку
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <div class="h-96 w-full">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2244.741712318121!2d37.60885931593097!3d55.76339798055603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a5a738fa419%3A0x7c347d506345523b!2z0YPQuy4g0KLQstC10YDQvdCw0Y8sIDE4LCDQnNC-0YHQutCy0LAsINCg0L7RgdGB0LjRjywgMTI1MDA5!5e0!3m2!1sru!2sru!4v1689762235001!5m2!1sru!2sru" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-600 text-white p-2 rounded-lg mr-3">
+                            <i class="fas fa-balance-scale text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">ЮПомощь</h3>
+                    </div>
+                    <p class="text-gray-400 mb-4">Профессиональная юридическая помощь для бизнеса и частных лиц с 2008 года.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Услуги</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Уголовные дела</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Жилищные споры</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Трудовые споры</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Договорное право</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Налоговые споры</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Корпоративное право</a></li>
+						<li><a href="admin-login.html" class="text-gray-400 hover:text-white">Админ-панель</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Компания</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white">О нас</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Команда</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Отзывы</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Блог</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Карьера</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Контакты</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-gray-400 mr-3 mt-1"></i>
+                            <span class="text-gray-400">г. Москва, ул. Тверская, д. 18, офис 305</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">+7 (495) 123-45-67</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">info@ypomosh.ru</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-clock text-gray-400 mr-3"></i>
+                            <span class="text-gray-400">Пн-Пт: 9:00 - 19:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2025 Юридическая компания "ЮПомощь". Все права защищены.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">Политика конфиденциальности</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Consultation Modal -->
+    <div id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4 w-full">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-800">Запись на консультацию</h3>
+                <button id="close-consultation-modal" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="consultation-form">
+                <div class="mb-4">
+                    <label for="consult-name" class="block text-gray-700 mb-2">Ваше имя</label>
+                    <input type="text" id="consult-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-4">
+                    <label for="consult-phone" class="block text-gray-700 mb-2">Телефон</label>
+                    <input type="tel" id="consult-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-4">
+                    <label for="consult-date" class="block text-gray-700 mb-2">Желаемая дата</label>
+                    <input type="date" id="consult-date" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                </div>
+                <div class="mb-4">
+                    <label for="consult-time" class="block text-gray-700 mb-2">Желаемое время</label>
+                    <select id="consult-time" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" required>
+                        <option value="">Выберите время</option>
+                        <option value="09:00-10:00">09:00 - 10:00</option>
+                        <option value="10:00-11:00">10:00 - 11:00</option>
+                        <option value="11:00-12:00">11:00 - 12:00</option>
+                        <option value="12:00-13:00">12:00 - 13:00</option>
+                        <option value="14:00-15:00">14:00 - 15:00</option>
+                        <option value="15:00-16:00">15:00 - 16:00</option>
+                        <option value="16:00-17:00">16:00 - 17:00</option>
+                        <option value="17:00-18:0">17:00 - 18:00</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="consult-message" class="block text-gray-700 mb-2">Краткое описание вопроса</label>
+                    <textarea id="consult-message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="form-checkbox text-blue-600" required>
+                        <span class="ml-2 text-gray-600">Я согласен на обработку персональных данных</span>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300">
+                    Записаться
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="bg-green-100 text-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Спасибо за заявку!</h3>
+                <p class="text-gray-600 mb-6">Наш юрист свяжется с вами в течение 30 минут для уточнения деталей.</p>
+                <button id="close-modal" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
+                    Закрыть
+                </button>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    // Обработка форм
+    document.addEventListener('DOMContentLoaded', function() {
+        // Сохранение заявок в localStorage
+        const saveApplication = (formData) => {
+            let applications = JSON.parse(localStorage.getItem('applications')) || [];
+            applications.push({
+                id: Date.now(),
+                ...formData,
+                status: 'new',
+                createdAt: new Date().toISOString()
+            });
+            localStorage.setItem('applications', JSON.stringify(applications));
+        };
+
+        // Обработка формы консультации
+        const consultationForm = document.getElementById('consultation-form');
+        if (consultationForm) {
+            consultationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: this.querySelector('#consult-name').value,
+                    phone: this.querySelector('#consult-phone').value,
+                    date: this.querySelector('#consult-date').value,
+                    time: this.querySelector('#consult-time').value,
+                    message: this.querySelector('#consult-message').value,
+                    type: 'consultation'
+                };
+                
+                saveApplication(formData);
+                consultationModal.classList.add('hidden');
+                successModal.classList.remove('hidden');
+                this.reset();
+            });
+        }
+
+        // Обработка контактной формы
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: this.querySelector('#name').value,
+                    phone: this.querySelector('#phone').value,
+                    email: this.querySelector('#email').value,
+                    service: this.querySelector('#service').value,
+                    message: this.querySelector('#message').value,
+                    type: 'contact'
+                };
+                
+                saveApplication(formData);
+                successModal.classList.remove('hidden');
+                this.reset();
+            });
+        }
+    });
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            }
+        });
+    });
+    
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            backToTopButton.classList.remove('opacity-0', 'invisible');
+            backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+            backToTopButton.classList.remove('opacity-100', 'visible');
+            backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+    
+    // FAQ accordion
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const accordion = button.closest('.accordion');
+            const content = accordion.querySelector('.accordion-content');
+            const icon = button.querySelector('i');
+            
+            accordion.classList.toggle('active');
+            
+            if (accordion.classList.contains('active')) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-minus');
+            } else {
+                icon.classList.remove('fa-minus');
+                icon.classList.add('fa-plus');
+            }
+        });
+    });
+           
+    // Price modal tabs
+    const priceTabs = document.querySelectorAll('.price-tab');
+    const priceTabContents = document.querySelectorAll('.price-tab-content');
+    
+    priceTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and contents
+            priceTabs.forEach(t => t.classList.remove('active', 'text-gray-700', 'border-blue-600'));
+            priceTabs.forEach(t => t.classList.add('text-gray-500'));
+            priceTabContents.forEach(c => c.classList.remove('active'));
+            priceTabContents.forEach(c => c.classList.add('hidden'));
+            
+            // Add active class to clicked tab and corresponding content
+            tab.classList.add('active', 'text-gray-700', 'border-blue-600');
+            tab.classList.remove('text-gray-500');
+            
+            const tabId = tab.getAttribute('data-tab') + '-tab';
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(tabId).classList.remove('hidden');
+        });
+    });
+    
+    // Modal open/close
+    const priceModal = document.getElementById('price-modal');
+    const closePriceModal = document.getElementById('close-price-modal');
+    const priceBtn = document.getElementById('price-btn');
+    
+    function openPriceModal() {
+        priceModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closePriceModalFunc() {
+        priceModal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+    }
+    
+    priceBtn.addEventListener('click', openPriceModal);
+    closePriceModal.addEventListener('click', closePriceModalFunc);
+    
+    // Consultation modal
+    const consultationBtn = document.getElementById('consultation-btn');
+    const consultationModal = document.getElementById('consultation-modal');
+    const closeConsultationModal = document.getElementById('close-consultation-modal');
+    
+    consultationBtn.addEventListener('click', () => {
+        consultationModal.classList.remove('hidden');
+    });
+    
+    closeConsultationModal.addEventListener('click', () => {
+        consultationModal.classList.add('hidden');
+    });
+    
+    // Consultation form submission
+    const consultationForm = document.getElementById('consultation-form');
+    
+    consultationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Here you would typically send the form data to a server
+        // For this example, we'll just show the success modal
+        consultationModal.classList.add('hidden');
+        successModal.classList.remove('hidden');
+        
+        // Reset form
+        consultationForm.reset();
+    });
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const successModal = document.getElementById('success-modal');
+    const closeModal = document.getElementById('close-modal');
+    
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Here you would typically send the form data to a server
+        // For this example, we'll just show the success modal
+        successModal.classList.remove('hidden');
+        
+        // Reset form
+        contactForm.reset();
+    });
+    
+    closeModal.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+	
+	document.addEventListener('DOMContentLoaded', function() {
+	
+	// Обработчики для кнопок тарифов
+    document.querySelectorAll('.price-card button').forEach(button => {
+        button.addEventListener('click', function() {
+            const card = this.closest('.price-card');
+            const serviceName = card.querySelector('h4').textContent;
+            const servicePrice = card.querySelector('span.text-3xl').textContent.replace('от', '').replace('₽', '').trim();
+            const serviceDescription = card.querySelector('p.text-gray-500').textContent;
+            
+            window.location.href = `payment.html?service=${encodeURIComponent(serviceName)}&price=${encodeURIComponent(servicePrice)}&description=${encodeURIComponent(serviceDescription)}`;
+        });
+    });
+});
+</script>
+</html>

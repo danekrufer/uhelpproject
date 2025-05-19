@@ -1,0 +1,28 @@
+# .dockerignore
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+
+# Логи и временные файлы
+*.log
+*.logs
+*.tmp
+*.swp
+*.bak
+*.orig
+
+# Node.js или Python (если появятся)
+node_modules
+__pycache__/
+
+# Dockerignore сам
+.dockerignore
+Dockerfile
+
+# Документация
+README.md
+LICENSE
