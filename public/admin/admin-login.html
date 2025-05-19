@@ -64,7 +64,7 @@
         // Любой может войти с этими данными
         if (username === 'admin' && password === 'admin') {
             localStorage.setItem('adminAuthenticated', 'true');
-            window.location.href = 'admin.html';
+            window.location.href = 'admin-dashboard.html';
         } else {
             alert('Используйте логин: admin, пароль: admin');
             document.getElementById('password').value = '';
