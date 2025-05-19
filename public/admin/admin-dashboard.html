@@ -6,9 +6,17 @@
     <title>Админ-панель | ЮПомощь</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body class="font-sans bg-gray-100">
-    <!-- Проверка аутентификации -->
+    <!-- Проверка авторизации -->
     <script>
         if (!localStorage.getItem('adminAuthenticated')) {
             window.location.href = 'admin-login.html';
@@ -16,7 +24,7 @@
     </script>
 
     <div class="flex min-h-screen">
-        <!-- Sidebar -->
+        <!-- Боковая панель -->
         <div class="w-64 bg-gray-800 text-white">
             <div class="p-4 border-b border-gray-700">
                 <div class="flex items-center">
@@ -31,7 +39,7 @@
             <nav class="p-4">
                 <ul>
                     <li class="mb-2">
-                        <a href="#dashboard" class="block px-4 py-2 rounded-lg bg-gray-700 text-white">
+                        <a href="#" class="block px-4 py-2 rounded-lg bg-gray-700 text-white">
                             <i class="fas fa-tachometer-alt mr-2"></i> Дашборд
                         </a>
                     </li>
@@ -46,16 +54,6 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="#services" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
-                            <i class="fas fa-gavel mr-2"></i> Услуги
-                        </a>
-                    </li>
-                    <li class="mb-2">
-                        <a href="#team" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
-                            <i class="fas fa-users mr-2"></i> Команда
-                        </a>
-                    </li>
-                    <li class="mb-2">
                         <a href="#settings" class="block px-4 py-2 rounded-lg hover:bg-gray-700 text-gray-300 hover:text-white">
                             <i class="fas fa-cog mr-2"></i> Настройки
                         </a>
@@ -64,9 +62,9 @@
             </nav>
         </div>
         
-        <!-- Main content -->
+        <!-- Основное содержимое -->
         <div class="flex-1">
-            <!-- Header -->
+            <!-- Шапка -->
             <header class="bg-white shadow-sm">
                 <div class="flex justify-between items-center p-4">
                     <h2 class="text-xl font-semibold text-gray-800">Дашборд</h2>
@@ -78,11 +76,11 @@
                 </div>
             </header>
             
-            <!-- Content -->
+            <!-- Контент -->
             <main class="p-6">
-                <!-- Stats -->
+                <!-- Статистика -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="stat-card bg-white p-6 rounded-lg shadow-sm">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500">Новые заявки</p>
@@ -94,7 +92,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="stat-card bg-white p-6 rounded-lg shadow-sm">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500">Ожидают оплаты</p>
@@ -106,7 +104,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="stat-card bg-white p-6 rounded-lg shadow-sm">
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-gray-500">Завершенные дела</p>
@@ -129,7 +127,7 @@
                     </button>
                 </div>
                 
-                <!-- Recent Applications -->
+                <!-- Таблица заявок -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
                     <div class="p-6 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-800">Последние заявки</h3>
@@ -154,7 +152,7 @@
                     </div>
                 </div>
                 
-                <!-- Recent Payments -->
+                <!-- Таблица платежей -->
                 <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                     <div class="p-6 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-800">Последние платежи</h3>
@@ -188,12 +186,13 @@
             window.location.href = 'admin-login.html';
         });
 
-        // Загрузка данных
+        // Загрузка данных при открытии страницы
         document.addEventListener('DOMContentLoaded', function() {
-            updateData();
+            loadData();
         });
 
-        function updateData() {
+        // Загрузка и отображение данных
+        function loadData() {
             // Загрузка заявок
             const applications = JSON.parse(localStorage.getItem('applications')) || [];
             
@@ -201,23 +200,31 @@
             const payments = JSON.parse(localStorage.getItem('payments')) || [];
             
             // Обновление счетчиков
-            document.getElementById('new-applications-count').textContent = 
-                applications.filter(app => app.status === 'new').length;
-            document.getElementById('pending-payments-count').textContent = 
-                payments.filter(p => p.status === 'pending').length;
-            document.getElementById('completed-cases-count').textContent = 
-                applications.filter(app => app.status === 'completed').length;
+            updateCounters(applications, payments);
             
-            // Заполнение таблицы заявок
-            renderApplicationsTable(applications);
+            // Отображение заявок
+            renderApplications(applications);
             
-            // Заполнение таблицы платежей
-            renderPaymentsTable(payments);
+            // Отображение платежей
+            renderPayments(payments);
         }
 
-        function renderApplicationsTable(applications) {
-            const applicationsTable = document.getElementById('applications-table-body');
-            applicationsTable.innerHTML = '';
+        // Обновление счетчиков
+        function updateCounters(applications, payments) {
+            document.getElementById('new-applications-count').textContent = 
+                applications.filter(app => app.status === 'new').length;
+            
+            document.getElementById('pending-payments-count').textContent = 
+                payments.filter(p => p.status === 'pending').length;
+            
+            document.getElementById('completed-cases-count').textContent = 
+                applications.filter(app => app.status === 'completed').length;
+        }
+
+        // Отображение заявок в таблице
+        function renderApplications(applications) {
+            const tableBody = document.getElementById('applications-table-body');
+            tableBody.innerHTML = '';
             
             applications.slice(0, 10).forEach(app => {
                 const row = document.createElement('tr');
@@ -251,13 +258,14 @@
                     </td>
                 `;
                 
-                applicationsTable.appendChild(row);
+                tableBody.appendChild(row);
             });
         }
 
-        function renderPaymentsTable(payments) {
-            const paymentsTable = document.getElementById('payments-table-body');
-            paymentsTable.innerHTML = '';
+        // Отображение платежей в таблице
+        function renderPayments(payments) {
+            const tableBody = document.getElementById('payments-table-body');
+            tableBody.innerHTML = '';
             
             payments.slice(0, 10).forEach(payment => {
                 const row = document.createElement('tr');
@@ -277,10 +285,11 @@
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${payment.date}</td>
                 `;
                 
-                paymentsTable.appendChild(row);
+                tableBody.appendChild(row);
             });
         }
 
+        // Изменение статуса заявки
         function changeApplicationStatus(id, newStatus) {
             let applications = JSON.parse(localStorage.getItem('applications')) || [];
             applications = applications.map(app => {
@@ -291,9 +300,10 @@
             });
             
             localStorage.setItem('applications', JSON.stringify(applications));
-            updateData();
+            loadData();
         }
 
+        // Экспорт данных
         function exportData() {
             const applications = JSON.parse(localStorage.getItem('applications')) || [];
             const payments = JSON.parse(localStorage.getItem('payments')) || [];
@@ -315,12 +325,13 @@
             linkElement.click();
         }
 
+        // Очистка данных
         function clearData() {
             if (confirm('Вы уверены, что хотите удалить все данные? Это действие нельзя отменить.')) {
                 localStorage.removeItem('applications');
                 localStorage.removeItem('payments');
                 alert('Все данные были удалены');
-                updateData();
+                loadData();
             }
         }
     </script>

@@ -54,21 +54,22 @@
     </div>
 
     <script>
-        document.getElementById('admin-login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Более безопасные учетные данные
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === 'admin' && password === 'SecurePass123!') {
-                localStorage.setItem('adminAuthenticated', 'true');
-                window.location.href = 'admin.html';
-            } else {
-                alert('Неверный логин или пароль');
-                document.getElementById('password').value = '';
-            }
-        });
-    </script>
+    document.getElementById('admin-login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Упрощенные учетные данные для демонстрации
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        
+        // Любой может войти с этими данными
+        if (username === 'admin' && password === 'admin') {
+            localStorage.setItem('adminAuthenticated', 'true');
+            window.location.href = 'admin.html';
+        } else {
+            alert('Используйте логин: admin, пароль: admin');
+            document.getElementById('password').value = '';
+        }
+    });
+</script>
 </body>
 </html>
