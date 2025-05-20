@@ -2,19 +2,19 @@
 # Используем минимальный образ NGINX
 FROM nginx:alpine
 
-# 1. Копируем ваш кастомный конфиг поверх дефолтного
-COPY config/nginx.conf /etc/nginx/nginx.conf
+# Удаляем дефолтные файлы NGINX
+RUN rm -rf /usr/share/nginx/html/*
 
-# 2. Копируем папку public туда, где nginx.conf её ищет
-COPY public /usr/share/nginx/html/public
+# Копируем исправленный конфиг
+COPY config/default.conf /etc/nginx/conf.d/default.conf
 
-# 3. Копируем ассеты так, чтобы они были по /usr/share/nginx/html/assets
-COPY assets /usr/share/nginx/html/assets
+# Копируем ВСЕ файлы проекта
+COPY . /usr/share/nginx/html/
 
-# Удаляем стандартный конфиг, чтобы не было «welcome page»
-RUN rm /etc/nginx/conf.d/default.conf
+# Чистим ненужное (опционально)
+RUN rm -rf /usr/share/nginx/html/.git /usr/share/nginx/html/.dockerignore /usr/share/nginx/html/Dockerfile
 
-# Открытие 80 порта
+# Открытие порта 80
 EXPOSE 80
 
 # Запуск nginx
