@@ -11,6 +11,11 @@ COPY public /usr/share/nginx/html/public
 # 3. Копируем ассеты так, чтобы они были по /usr/share/nginx/html/assets
 COPY assets /usr/share/nginx/html/assets
 
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Удаляем стандартный конфиг, чтобы не было «welcome page»
+RUN rm /etc/nginx/conf.d/default.conf
 
+# Открытие 80 порта
+EXPOSE 80
+
+# Запуск nginx
+CMD ["nginx", "-g", "daemon off;"]
