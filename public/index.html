@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .hero-section {
-            background: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
+            background-image: url('../assets/img/banners/8c165bc5bf825d4651e45b4cf6cbf6b8.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -22,7 +22,7 @@
             right: 0;
             bottom: 0;
             background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(4px);
         }
         .hero-content {
             position: relative;
@@ -98,7 +98,7 @@
     </style>
 </head>
 <body class="font-sans bg-gray-50">
-    <!-- Header -->
+    <!-- Вверхние кнопки -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center">
@@ -129,7 +129,7 @@
             </div>
         </div>
         
-        <!-- Mobile menu -->
+        <!-- Меню для телефонов -->
         <div class="md:hidden hidden bg-white shadow-lg" id="mobile-menu">
             <div class="container mx-auto px-4 py-3 flex flex-col space-y-3">
                 <a href="#services" class="text-gray-600 hover:text-blue-600 py-2">Услуги</a>
@@ -146,7 +146,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Описание -->
     <section class="hero-section text-white py-20 min-h-[500px] flex items-center">
         <div class="container mx-auto px-4 hero-content">
             <div class="max-w-2xl p-8 rounded-lg">
@@ -164,7 +164,7 @@
         </div>
     </section>
 
-    <!-- Price Modal -->
+    <!-- Кнопка прайса услуг -->
     <div id="price-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-xl p-6 max-w-6xl w-full mx-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center mb-8 sticky top-0 bg-white py-4 border-b">
@@ -177,7 +177,7 @@
                 </button>
             </div>
             
-            <!-- Pricing Tabs -->
+            <!-- Кнопки с вверху -->
             <div class="mb-8">
                 <div class="flex flex-wrap border-b border-gray-200">
                     <button class="price-tab active px-6 py-3 font-medium text-gray-700 border-b-2 border-blue-600" data-tab="individual">
@@ -192,10 +192,10 @@
                 </div>
             </div>
             
-            <!-- Individual Pricing -->
+            <!-- Индивидуальные цены -->
             <div id="individual-tab" class="price-tab-content active">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <!-- Basic Plan -->
+                    <!-- Бизнес план -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                         <div class="mb-6">
                             <h4 class="text-xl font-bold text-gray-800 mb-2">Базовый</h4>
@@ -217,7 +217,7 @@
 						</button>
                     </div>
                     
-                    <!-- Standard Plan (Popular) -->
+                    <!-- Стандартный план (популярный) -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-blue-100 p-6 relative">
                         <div class="popular-badge">Популярный</div>
                         <div class="mb-6">
@@ -240,7 +240,7 @@
                         </button>
                     </div>
                     
-                    <!-- Premium Plan -->
+                    <!-- Премимум план -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                         <div class="mb-6">
                             <h4 class="text-xl font-bold text-gray-800 mb-2">Премиум</h4>
@@ -312,10 +312,10 @@
                 </div>
             </div>
             
-            <!-- Business Pricing -->
+            <!-- Бизнес прайс -->
             <div id="business-tab" class="price-tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <!-- Startup Plan -->
+                    <!-- Стартап -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                         <div class="mb-6">
                             <h4 class="text-xl font-bold text-gray-800 mb-2">Стартап</h4>
@@ -337,7 +337,7 @@
                         </button>
                     </div>
                     
-                    <!-- Business Plan (Popular) -->
+                    <!-- бизнес план (популярный) -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-blue-100 p-6 relative">
                         <div class="popular-badge">Популярный</div>
                         <div class="mb-6">
@@ -360,7 +360,7 @@
                         </button>
                     </div>
                     
-                    <!-- Corporate Plan -->
+                    <!-- Корпоративный план -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                         <div class="mb-6">
                             <h4 class="text-xl font-bold text-gray-800 mb-2">Корпоративный</h4>
@@ -432,7 +432,7 @@
                 </div>
             </div>
 
-            <!-- Premium Pricing -->
+            <!-- Премиум цены -->
             <div id="premium-tab" class="price-tab-content hidden">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <!-- VIP Support -->
@@ -460,7 +460,7 @@
                         </button>
                     </div>
                     
-                    <!-- Complex Case -->
+                    <!-- комплекс -->
                     <div class="price-card bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                         <div class="mb-6">
                             <div class="flex items-center">
@@ -503,7 +503,7 @@
             </div>
         </div>
     </div>
-    <!-- Stats Section -->
+    <!-- Раздел статистики -->
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -542,7 +542,7 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- перечень услуг -->
     <section id="services" class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
@@ -551,7 +551,7 @@
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
+                <!-- услуга 1-->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -567,7 +567,7 @@
                     </div>
                 </div>
                 
-                <!-- Service 2 -->
+                <!-- услуга 2 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -583,7 +583,7 @@
                     </div>
                 </div>
                 
-                <!-- Service 3 -->
+                <!-- услуга 3 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -599,7 +599,7 @@
                     </div>
                 </div>
                 
-                <!-- Service 4 -->
+                <!-- услуга 4 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -615,7 +615,7 @@
                     </div>
                 </div>
                 
-                <!-- Service 5 -->
+                <!-- услуга 5 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -631,7 +631,7 @@
                     </div>
                 </div>
                 
-                <!-- Service 6 -->
+                <!-- услуга 6 -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden service-card transition duration-300 relative group">
                     <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition duration-300 z-0"></div>
                     <div class="p-6 relative z-10">
@@ -662,7 +662,7 @@
         <div class="container mx-auto px-4">
             <div class="flex flex-col lg:flex-row items-center">
                 <div class="lg:w-1/2 mb-10 lg:mb-0 lg:pr-10">
-                    <img src="https://images.unsplash.com/photo-1521791055366-0d40387274f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                    <img src="../assets/banners/ofice.png" 
                          alt="Офис юридической компании" 
                          class="rounded-lg shadow-xl w-full">
                 </div>
@@ -799,7 +799,7 @@
                 <div class="bg-gray-50 rounded-xl p-8 testimonial-card">
                     <div class="flex items-center mb-6">
                         <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="https://cdn.discordapp.com/attachments/1177908396712792195/1373735335133188127/image.png?ex=682b7e3a&is=682a2cba&hm=02d25416dbea174401c1952d3cb435d897263e03aee3741c0bc8e56101dd05a9&" alt="Дмитрий С." class="w-full h-full object-cover">
+                            <img src="https://cdn.discordapp.com/attachments/1177908396712792195/1373735335133188127/image.png?ex=682b7e3a&is=682a2cba&hm=02d25416dbea174401c1952d3cb435d897263e03aee3741c0bc8e56101dd05a9&" alt="Сергей З." class="w-full h-full object-cover">
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-800">Сергей З. </h4>
